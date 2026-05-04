@@ -1,0 +1,9 @@
+server.js
+uploads/
+.env
+.env.local
+*.log
+*.excalidraw
+PORT_PLAN.md
+journal.md
+AGENTS.md

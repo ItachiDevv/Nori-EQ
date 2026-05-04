@@ -1,0 +1,204 @@
+{
+  "meta": {
+    "title": "Nori EQ — Demo Timeline",
+    "track": "/nous.mp3",
+    "trackName": "Nori Nori (Clawville)",
+    "totalSec": 150.0,
+    "targetDuration": "2:30",
+    "hardCap": "3:00",
+    "fps": 30,
+    "notes": "Drives both the offline-rendered MP3 (Remotion soundtrack) and the page-side runDemoTimeline() that animates faders during screen recording. Param names match window.eqState keys and window.fxNodes. dB faders: -60..+12. reverb: 0..1, width: 0..2, speed: 0.5..2, drive: 0..100, filter: 100..22000."
+  },
+
+  "segments": [
+    {
+      "id": "intro",
+      "tStart": 0.0,
+      "tEnd": 8.0,
+      "title": "NORI EQ",
+      "subtitle": "Mix your music. See your music.",
+      "caption": null,
+      "voCue": "Title card holds. Stage atmosphere already breathing under the logo.",
+      "uiHints": ["title-card", "logo-bloom"]
+    },
+    {
+      "id": "mixer-baseline",
+      "tStart": 8.0,
+      "tEnd": 18.0,
+      "title": "Live Web Audio Mixer",
+      "subtitle": "Real BiquadFilter buses + master FX chain",
+      "caption": "Sub · Low · Mid · High · Master",
+      "voCue": "Pan to mixer panel. Pill bar live, atmosphere reactive, all faders at 0 dB.",
+      "uiHints": ["highlight-mixer", "show-pillbar"]
+    },
+    {
+      "id": "sub-fader",
+      "tStart": 18.0,
+      "tEnd": 28.0,
+      "title": "SUB → SIGIL",
+      "subtitle": "Sub-bass drives sigil intensity",
+      "caption": "SUB → Sigil intensity on bass kicks",
+      "voCue": "SUB fader rises +9 dB; sigil flashes punch on the kick. Then settle back to 0.",
+      "uiHints": ["highlight-sub-fader", "flash-sigil-pill"]
+    },
+    {
+      "id": "mid-ascii",
+      "tStart": 28.0,
+      "tEnd": 38.0,
+      "title": "MID → ASCII",
+      "subtitle": "Midrange controls ASCII cell size",
+      "caption": "MID → ASCII grain size",
+      "voCue": "MID dips to -10 dB, ASCII grain fattens into chunky blocks. Push to +8 — cells get fine, vocals carve through.",
+      "uiHints": ["highlight-mid-fader", "highlight-ascii-overlay"]
+    },
+    {
+      "id": "high-kaleido",
+      "tStart": 38.0,
+      "tEnd": 48.0,
+      "title": "HIGH → KALEIDO",
+      "subtitle": "Top-end rotates the LED kaleido",
+      "caption": "HIGH → LED rotation speed",
+      "voCue": "HIGH up +9 dB. Kaleido spins faster on every hi-hat. Drop back to neutral.",
+      "uiHints": ["highlight-high-fader", "spin-kaleido"]
+    },
+    {
+      "id": "reverb-knob",
+      "tStart": 48.0,
+      "tEnd": 60.0,
+      "title": "REVERB",
+      "subtitle": "Real ConvolverNode tail",
+      "caption": "Real ConvolverNode reverb. Audible because the audio is rendered offline through the same chain.",
+      "voCue": "REVERB knob ramps 0.25 → 0.85. Stage bloom blossoms. Hold the wash for 4s, then back to dry.",
+      "uiHints": ["highlight-reverb-knob", "stage-bloom"]
+    },
+    {
+      "id": "filter-sweep",
+      "tStart": 60.0,
+      "tEnd": 72.0,
+      "title": "FILTER",
+      "subtitle": "Lowpass cutoff + stage hue",
+      "caption": "FILTER → cutoff Hz + stage hue rotation",
+      "voCue": "FILTER sweeps 22 kHz → 600 Hz exponentially. Track gets dark, stage hue rotates magenta. Pop back open.",
+      "uiHints": ["highlight-filter-knob", "hue-rotate-stage"]
+    },
+    {
+      "id": "drive-crunch",
+      "tStart": 72.0,
+      "tEnd": 84.0,
+      "title": "DRIVE",
+      "subtitle": "Soft saturation + posterize",
+      "caption": "DRIVE → soft saturation + pixel posterize",
+      "voCue": "DRIVE 15 → 85. Track gets crunchy, pixel overlay collapses to 3 color levels. Pull back.",
+      "uiHints": ["highlight-drive-knob", "highlight-pixel-overlay"]
+    },
+    {
+      "id": "nori-chat",
+      "tStart": 84.0,
+      "tEnd": 102.0,
+      "title": "NORI",
+      "subtitle": "Gemini 2.5 multimodal feedback",
+      "caption": "Gemini multimodal listens to your mix and replies — grounded in real ebur128 + FFT metrics.",
+      "voCue": "Open Nori pill. Type 'Is the bass too thin?'. AI reply streams in with infographic SVG. Bestie voice.",
+      "uiHints": ["open-nori-panel", "show-ai-bubble", "show-infographic"]
+    },
+    {
+      "id": "split-mode",
+      "tStart": 102.0,
+      "tEnd": 120.0,
+      "title": "SPLIT",
+      "subtitle": "A/B two mixer states",
+      "caption": "Split: compare two mixer states. Pick the winner.",
+      "voCue": "Click SPLIT. Two random presets load on left/right. Save A. Tweak. Save B. Toggle — faders snap between the two.",
+      "uiHints": ["enter-split-mode", "save-A", "save-B", "toggle-A-B"]
+    },
+    {
+      "id": "export",
+      "tStart": 120.0,
+      "tEnd": 138.0,
+      "title": "EXPORT",
+      "subtitle": "OfflineAudioContext → MP3",
+      "caption": "Render your mix. OfflineAudioContext + lamejs MP3.",
+      "voCue": "Click EXPORT pill. Pick MP3. Progress bar fills. 'DOWNLOADED' confirmation.",
+      "uiHints": ["open-export-modal", "select-mp3", "show-progress", "show-download-confirm"]
+    },
+    {
+      "id": "outro",
+      "tStart": 138.0,
+      "tEnd": 150.0,
+      "title": "NORI EQ",
+      "subtitle": "Made with Hermes · Suno · Kimi K2.6",
+      "caption": "github.com/your/nori-eq · made with Hermes",
+      "voCue": "Full stage lit, all effects pulsing. Logo fades in over the wash.",
+      "uiHints": ["full-stage-pulse", "logo-fade-in", "credits"]
+    }
+  ],
+
+  "automation": [
+    { "t": 0.0,   "param": "sub",    "to": 0,     "ramp": "step" },
+    { "t": 0.0,   "param": "low",    "to": 0,     "ramp": "step" },
+    { "t": 0.0,   "param": "mid",    "to": 0,     "ramp": "step" },
+    { "t": 0.0,   "param": "high",   "to": 0,     "ramp": "step" },
+    { "t": 0.0,   "param": "master", "to": 0,     "ramp": "step" },
+    { "t": 0.0,   "param": "drive",  "to": 15,    "ramp": "step" },
+    { "t": 0.0,   "param": "reverb", "to": 0.25,  "ramp": "step" },
+    { "t": 0.0,   "param": "width",  "to": 1.0,   "ramp": "step" },
+    { "t": 0.0,   "param": "speed",  "to": 1.0,   "ramp": "step" },
+    { "t": 0.0,   "param": "filter", "to": 22000, "ramp": "step" },
+
+    { "t": 19.0,  "param": "sub",    "to": 9.0,   "ramp": "linear",      "rampSec": 2.0, "segment": "sub-fader" },
+    { "t": 25.0,  "param": "sub",    "to": 0.0,   "ramp": "linear",      "rampSec": 2.0, "segment": "sub-fader" },
+
+    { "t": 29.0,  "param": "mid",    "to": -10.0, "ramp": "linear",      "rampSec": 1.5, "segment": "mid-ascii" },
+    { "t": 33.0,  "param": "mid",    "to": 8.0,   "ramp": "linear",      "rampSec": 2.0, "segment": "mid-ascii" },
+    { "t": 36.5,  "param": "mid",    "to": 0.0,   "ramp": "linear",      "rampSec": 1.5, "segment": "mid-ascii" },
+
+    { "t": 39.0,  "param": "high",   "to": 9.0,   "ramp": "linear",      "rampSec": 2.0, "segment": "high-kaleido" },
+    { "t": 45.5,  "param": "high",   "to": 0.0,   "ramp": "linear",      "rampSec": 2.0, "segment": "high-kaleido" },
+
+    { "t": 49.0,  "param": "reverb", "to": 0.85,  "ramp": "linear",      "rampSec": 3.0, "segment": "reverb-knob" },
+    { "t": 56.0,  "param": "reverb", "to": 0.25,  "ramp": "linear",      "rampSec": 3.0, "segment": "reverb-knob" },
+
+    { "t": 61.0,  "param": "filter", "to": 600,   "ramp": "exponential", "rampSec": 5.0, "segment": "filter-sweep" },
+    { "t": 67.5,  "param": "filter", "to": 22000, "ramp": "exponential", "rampSec": 3.5, "segment": "filter-sweep" },
+
+    { "t": 73.0,  "param": "drive",  "to": 85,    "ramp": "linear",      "rampSec": 2.5, "segment": "drive-crunch" },
+    { "t": 80.0,  "param": "drive",  "to": 15,    "ramp": "linear",      "rampSec": 2.5, "segment": "drive-crunch" },
+
+    { "t": 85.0,  "param": "reverb", "to": 0.35,  "ramp": "linear",      "rampSec": 1.0, "segment": "nori-chat" },
+    { "t": 100.0, "param": "reverb", "to": 0.25,  "ramp": "linear",      "rampSec": 1.5, "segment": "nori-chat" },
+
+    { "t": 103.0, "param": "sub",    "to": 4.0,   "ramp": "linear",      "rampSec": 0.4, "segment": "split-mode-A" },
+    { "t": 103.0, "param": "low",    "to": -3.0,  "ramp": "linear",      "rampSec": 0.4, "segment": "split-mode-A" },
+    { "t": 103.0, "param": "mid",    "to": 2.0,   "ramp": "linear",      "rampSec": 0.4, "segment": "split-mode-A" },
+    { "t": 103.0, "param": "high",   "to": 5.0,   "ramp": "linear",      "rampSec": 0.4, "segment": "split-mode-A" },
+    { "t": 103.0, "param": "width",  "to": 1.4,   "ramp": "linear",      "rampSec": 0.4, "segment": "split-mode-A" },
+
+    { "t": 110.0, "param": "sub",    "to": -2.0,  "ramp": "linear",      "rampSec": 0.4, "segment": "split-mode-B" },
+    { "t": 110.0, "param": "low",    "to": 3.0,   "ramp": "linear",      "rampSec": 0.4, "segment": "split-mode-B" },
+    { "t": 110.0, "param": "mid",    "to": -4.0,  "ramp": "linear",      "rampSec": 0.4, "segment": "split-mode-B" },
+    { "t": 110.0, "param": "high",   "to": 7.0,   "ramp": "linear",      "rampSec": 0.4, "segment": "split-mode-B" },
+    { "t": 110.0, "param": "width",  "to": 0.7,   "ramp": "linear",      "rampSec": 0.4, "segment": "split-mode-B" },
+    { "t": 110.0, "param": "drive",  "to": 35,    "ramp": "linear",      "rampSec": 0.4, "segment": "split-mode-B" },
+
+    { "t": 115.0, "param": "sub",    "to": 4.0,   "ramp": "linear",      "rampSec": 0.4, "segment": "split-toggle-back-A" },
+    { "t": 115.0, "param": "low",    "to": -3.0,  "ramp": "linear",      "rampSec": 0.4, "segment": "split-toggle-back-A" },
+    { "t": 115.0, "param": "mid",    "to": 2.0,   "ramp": "linear",      "rampSec": 0.4, "segment": "split-toggle-back-A" },
+    { "t": 115.0, "param": "high",   "to": 5.0,   "ramp": "linear",      "rampSec": 0.4, "segment": "split-toggle-back-A" },
+    { "t": 115.0, "param": "width",  "to": 1.4,   "ramp": "linear",      "rampSec": 0.4, "segment": "split-toggle-back-A" },
+    { "t": 115.0, "param": "drive",  "to": 15,    "ramp": "linear",      "rampSec": 0.4, "segment": "split-toggle-back-A" },
+
+    { "t": 119.0, "param": "sub",    "to": 0.0,   "ramp": "linear",      "rampSec": 0.6, "segment": "split-merge-out" },
+    { "t": 119.0, "param": "low",    "to": 0.0,   "ramp": "linear",      "rampSec": 0.6, "segment": "split-merge-out" },
+    { "t": 119.0, "param": "mid",    "to": 0.0,   "ramp": "linear",      "rampSec": 0.6, "segment": "split-merge-out" },
+    { "t": 119.0, "param": "high",   "to": 2.0,   "ramp": "linear",      "rampSec": 0.6, "segment": "split-merge-out" },
+    { "t": 119.0, "param": "width",  "to": 1.0,   "ramp": "linear",      "rampSec": 0.6, "segment": "split-merge-out" },
+    { "t": 119.0, "param": "drive",  "to": 15,    "ramp": "linear",      "rampSec": 0.6, "segment": "split-merge-out" },
+
+    { "t": 138.0, "param": "sub",    "to": 6.0,   "ramp": "linear",      "rampSec": 2.0, "segment": "outro" },
+    { "t": 138.0, "param": "high",   "to": 6.0,   "ramp": "linear",      "rampSec": 2.0, "segment": "outro" },
+    { "t": 138.0, "param": "master", "to": 2.0,   "ramp": "linear",      "rampSec": 2.0, "segment": "outro" },
+    { "t": 138.0, "param": "reverb", "to": 0.6,   "ramp": "linear",      "rampSec": 3.0, "segment": "outro" },
+    { "t": 138.0, "param": "width",  "to": 1.4,   "ramp": "linear",      "rampSec": 2.0, "segment": "outro" },
+    { "t": 146.0, "param": "master", "to": -12.0, "ramp": "linear",      "rampSec": 4.0, "segment": "outro-fade" }
+  ]
+}
