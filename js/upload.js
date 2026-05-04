@@ -6,10 +6,13 @@ const uploadedName = document.getElementById('uploadedName');
 let currentSound = null;
 
 function switchToPane(id) {
-  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
-  document.querySelectorAll('.pane').forEach(x=>x.classList.remove('active'));
-  document.querySelector(`.tab[data-pane="${id}"]`).classList.add('active');
-  document.getElementById(id).classList.add('active');
+  // .tab nav was removed from index.html; guard against null lookups.
+  document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
+  document.querySelectorAll('.pane').forEach(x => x.classList.remove('active'));
+  const tab = document.querySelector(`.tab[data-pane="${id}"]`);
+  if (tab) tab.classList.add('active');
+  const pane = document.getElementById(id);
+  if (pane) pane.classList.add('active');
 }
 
 dropzone.addEventListener('click', () => audioInput.click());

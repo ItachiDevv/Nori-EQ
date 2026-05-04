@@ -434,12 +434,15 @@
       }
       const s = document.createElement('script');
       s.id = 'lamejsScript';
-      s.src = 'https://cdn.jsdelivr.net/npm/@breezystack/lamejs@1.2.7/lame.min.js';
+      // Local bundle (vendor/lamejs.iife.js) — replaces a previously-broken
+      // jsdelivr URL that 404'd in production. Self-hosted so MP3 export
+      // works regardless of CDN reachability.
+      s.src = '/vendor/lamejs.iife.js';
       s.onload = () => {
         if (window.lamejs && window.lamejs.Mp3Encoder) res(window.lamejs);
         else rej(new Error('lamejs loaded but Mp3Encoder missing'));
       };
-      s.onerror = () => rej(new Error('lamejs CDN load failed'));
+      s.onerror = () => rej(new Error('lamejs script load failed'));
       document.head.appendChild(s);
     });
   }
