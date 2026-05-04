@@ -3,7 +3,7 @@
 Web audio playground with reactive visuals, an in-browser EQ rack, and AI engineering feedback. Drop a track, mix it through a 6-band EQ + drive/reverb/width FX, and ask **Nori** — a cute anime-idol mixing engineer powered by Gemini 2.5 multimodal — what to fix.
 
 **Live demo:** https://www.norieq.com
-**Catch us on https.x.com/ClawvilleWorld**
+**Catch us on https.x.com/Clawville_World**
 <img width="75" height="150" alt="anime_singer-removebg-preview" src="https://github.com/user-attachments/assets/95e06297-4a42-4943-906f-a58cb8793c72" />
 ---
 
