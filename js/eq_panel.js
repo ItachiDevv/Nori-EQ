@@ -224,7 +224,7 @@ setTimeout(initAudio, 0);
   if (document.getElementById('eqPanelStyle')) return;
   const css = `
     #eqPanel {
-      position: fixed; left: 0; right: 0; bottom: 0; z-index: 200;
+      position: fixed; left: 0; right: 0; bottom: 0; z-index: 220;
       height: 150px; padding: 6px 10px;
       display: flex; flex-direction: column; align-items: stretch; gap: 4px;
       background: rgba(15, 5, 32, 0.78);
@@ -238,7 +238,7 @@ setTimeout(initAudio, 0);
     }
     #eqPanel .controls-row {
       display: flex; flex-direction: row; align-items: stretch; gap: 8px;
-      flex: 1; min-height: 0; overflow: hidden;
+      flex: 1; min-height: 0;
     }
     /* Two-line readouts ABOVE the mixer — no pill bubbles, just colored text */
     #eqPillBar {
@@ -277,10 +277,23 @@ setTimeout(initAudio, 0);
       width: 1px; align-self: center; height: 26px;
       background: rgba(255, 51, 102, 0.4);
     }
-    #eqPanel .pill-section-label-spacer {
-      writing-mode: vertical-rl; visibility: hidden;
+    #eqPillBar .section-label {
+      writing-mode: vertical-rl; transform: rotate(180deg);
       font-size: 0.6rem; letter-spacing: 3px; font-weight: 700;
-      padding: 0 4px;
+      align-self: center; padding: 0 4px;
+      visibility: hidden;
+    }
+    #eqPillBar .divider {
+      width: 1px; margin: 4px 2px; visibility: hidden;
+    }
+    #eqPillBar .pill-reset-spacer {
+      align-self: center; margin: 0 6px;
+      border: 1px solid transparent;
+      font: bold 0.62rem 'Courier New', monospace;
+      letter-spacing: 1.5px;
+      padding: 10px 12px;
+      writing-mode: vertical-rl;
+      visibility: hidden;
     }
     #eqPanel .section {
       display: flex; flex-direction: row; gap: 4px;
@@ -416,20 +429,49 @@ const pillBar = document.createElement('div');
 pillBar.id = 'eqPillBar';
 document.body.appendChild(pillBar);
 
+// Hidden spacers in the pill bar that mirror the section-labels, dividers,
+// and reset button in #eqPanel .controls-row. Without these, the flex
+// proportions diverge (pill sections get the full row width while control
+// sections lose width to the labels/dividers/reset), so the readouts above
+// drift out of column with the controls below.
+function mkSectionLblSpacer(text){
+  const s = document.createElement('div');
+  s.className = 'section-label';
+  s.textContent = text;
+  return s;
+}
+function mkPillBarDivider(){
+  const d = document.createElement('div');
+  d.className = 'divider';
+  return d;
+}
+
 const pillSecMixer = document.createElement('div');
 pillSecMixer.className = 'pill-section';
 pillSecMixer.style.flex = '4';
+pillSecMixer.appendChild(mkSectionLblSpacer('MIXER'));
 pillBar.appendChild(pillSecMixer);
+
+pillBar.appendChild(mkPillBarDivider());
 
 const pillSecMaster = document.createElement('div');
 pillSecMaster.className = 'pill-section';
 pillSecMaster.style.flex = '1';
+pillSecMaster.appendChild(mkSectionLblSpacer('MASTER'));
 pillBar.appendChild(pillSecMaster);
+
+pillBar.appendChild(mkPillBarDivider());
 
 const pillSecFx = document.createElement('div');
 pillSecFx.className = 'pill-section';
 pillSecFx.style.flex = '5';
+pillSecFx.appendChild(mkSectionLblSpacer('FX'));
 pillBar.appendChild(pillSecFx);
+
+const pillResetSpacer = document.createElement('div');
+pillResetSpacer.className = 'pill-reset-spacer';
+pillResetSpacer.textContent = 'RESET';
+pillBar.appendChild(pillResetSpacer);
 
 const pills = {};
 const VFX_COLORS = {
