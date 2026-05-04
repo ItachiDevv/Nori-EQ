@@ -1,12 +1,9 @@
-/* upload.js — audio file upload + microphone handling */
+/* upload.js — audio file upload */
 const dropzone = document.getElementById('dropzone');
 const audioInput = document.getElementById('audioInput');
 const uploadedName = document.getElementById('uploadedName');
-const micBtn = document.getElementById('micBtn');
-const micStatus = document.getElementById('micStatus');
 
 let currentSound = null;
-let currentMic = null;
 
 function switchToPane(id) {
   document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
@@ -35,7 +32,6 @@ function handleAudioFile(file) {
   window.currentTrackFile = file;  // stash for on-demand analysis (Nori, etc.)
   uploadedName.textContent = `Loaded: ${file.name} — analyzing...`;
   if (currentSound) { currentSound.stop(); currentSound = null; }
-  if (currentMic) { currentMic.stop(); currentMic = null; }
   window.lastServerAnalysis = null;
 
   // Run browser-side analysis FIRST so metrics are available for the server call.
@@ -53,34 +49,25 @@ function handleAudioFile(file) {
 
   const url = URL.createObjectURL(file);
   currentSound = loadSound(url, () => {
+    // Stop the old default track if it's still playing — leftover from
+    // first-click default_track.js that started before this upload.
+    if (window._nousSound && window._nousSound !== currentSound) {
+      try { if (typeof window._nousSound.stop === 'function') window._nousSound.stop(); } catch (_) {}
+    }
+    // Promote the uploaded sound to the global slot every other module
+    // reads from (audio_reactivity.js, eq_panel.js speed knob, etc.).
+    window._nousSound = currentSound;
     currentSound.play();
+    // Reroute the EQ + FX chain inputs from the old source to this one
+    // (no-op if the EQ chain hasn't been built yet — initAudio will pick
+    // up _nousSound on its next poll).
+    if (typeof window.rerouteToNewSource === 'function') {
+      window.rerouteToNewSource(currentSound);
+    }
     if (typeof connectAudio === 'function') connectAudio('file', currentSound);
-    micStatus.textContent = '';
     switchToPane('stagePane');
   }, (err) => {
     uploadedName.textContent = 'Error loading audio';
     console.error(err);
   });
 }
-
-micBtn.addEventListener('click', async () => {
-  if (currentMic) {
-    currentMic.stop();
-    currentMic = null;
-    micBtn.textContent = 'Use Microphone';
-    micStatus.textContent = 'Mic stopped';
-    if (typeof connectAudio === 'function') connectAudio(null, null);
-    return;
-  }
-  try {
-    currentMic = new p5.AudioIn();
-    await currentMic.start();
-    micStatus.textContent = 'Microphone active';
-    micBtn.textContent = 'Stop Microphone';
-    if (typeof connectAudio === 'function') connectAudio('mic', currentMic);
-    switchToPane('stagePane');
-  } catch (e) {
-    micStatus.textContent = 'Mic blocked or unavailable';
-    console.error(e);
-  }
-});

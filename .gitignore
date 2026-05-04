@@ -5,3 +5,5 @@ uploads/
 *.log
 .DS_Store
 .vercel
+remotion/
+gh.deb

@@ -85,11 +85,24 @@ function getAudioLevel() {
   return level;
 }
 
-function connectAudio() {
-  mic = new p5.AudioIn();
-  mic.start();
-  fft.setInput(mic);
-  waveform.setInput(mic);
+function connectAudio(source, sound) {
+  // No-mic-prompt design: `mic` is a stub object exposing the methods the
+  // visualizer expects (getLevel, stop). default_track.js patches
+  // mic.getLevel to read the default song's amplitude after playback
+  // starts. upload.js calls connectAudio('file', currentSound) on every
+  // new upload so we can re-patch it for the freshly-loaded track and
+  // re-bind fft/waveform to the new source.
+  if (!mic) {
+    mic = { getLevel: () => 0, stop: () => {} };
+  }
+  if (source === 'file' && sound) {
+    mic.getLevel = () => {
+      try { return Math.max(0, Math.min(1, (sound.getLevel ? sound.getLevel() : 0) * 1.5)); }
+      catch (_) { return 0; }
+    };
+    if (fft && typeof fft.setInput === 'function') fft.setInput(sound);
+    if (waveform && typeof waveform.setInput === 'function') waveform.setInput(sound);
+  }
 }
 
 function hslToRgb(h, s, l) {

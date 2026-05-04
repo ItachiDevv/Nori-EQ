@@ -56,6 +56,21 @@ function initAudio(){
   SRC = src;
   try { SRC.disconnect(); } catch(_) {}
 
+  // Expose a reroute helper so upload.js can swap the source after a
+  // new track is loaded. Reuses the existing bus filters + master FX
+  // chain; only the input node changes.
+  window.rerouteToNewSource = function(newSrc) {
+    if (!ac || !newSrc || newSrc === SRC) return;
+    if (SRC) { try { SRC.disconnect(); } catch(_) {} }
+    try { newSrc.disconnect(); } catch(_) {}
+    SRC = newSrc;
+    newSrc.__eqRouted = true;
+    BUSES.forEach(b => {
+      const first = nodes[b] && nodes[b].filters && nodes[b].filters[0];
+      if (first) { try { newSrc.connect(first); } catch(e) { console.warn('reroute', b, e); } }
+    });
+  };
+
   BUSES.forEach(b => {
     let prev = null;
     nodes[b] = {filters:[]};
