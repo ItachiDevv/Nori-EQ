@@ -4,7 +4,7 @@ Web audio playground with reactive visuals, an in-browser EQ rack, and AI engine
 
 **Live demo:** https://www.norieq.com
 **Catch us on https.x.com/ClawvilleWorld**
-<img width="25" height="50" alt="anime_singer-removebg-preview" src="https://github.com/user-attachments/assets/95e06297-4a42-4943-906f-a58cb8793c72" />
+<img width="75" height="150" alt="anime_singer-removebg-preview" src="https://github.com/user-attachments/assets/95e06297-4a42-4943-906f-a58cb8793c72" />
 ---
 
 ## Features
